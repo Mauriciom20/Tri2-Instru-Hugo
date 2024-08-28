@@ -83,7 +83,7 @@ Usos comunes de CHAR_LENGTH()
 Validación de longitud de texto: Se usa para validar que las cadenas de texto no excedan un número máximo de caracteres (por ejemplo, en formularios o inputs).
 Manipulación de cadenas: Puede ayudar en operaciones donde es importante saber cuántos caracteres tiene una cadena antes de realizar manipulaciones como cortar texto, dividir cadenas, etc.
 Análisis de datos: En análisis de texto o datos, es útil para identificar cadenas de texto de una longitud específica o para optimizar consultas donde la longitud del texto es relevante.*/
----------------------------------------------------------------
+----------------------------------------------------------------
 /*PRUEBA COMPRESS*/
 CREATE TABLE documentos(
 	id INT AUTO_INCREMENT PRIMARY KEY,
@@ -95,13 +95,14 @@ UPDATE documentos SET texto_comprimido = COMPRESS(texto_original);
 SELECT id, texto_original, texto_comprimido FROM documentos;
 SELECT id, texto_original, UNCOMPRESS(texto_comprimido) AS texto_descomprimido FROM documentos;
 DROP TABLE documentos
-
-
-
-
-
-
-
+/*Explicación de la función COMPRESS()
+COMPRESS() utiliza el algoritmo zlib para comprimir una cadena de texto o datos binarios. Los datos comprimidos se almacenan en formato binario, lo que reduce su tamaño, pero no pueden ser leídos directamente sin descomprimirlos.
+Los datos comprimidos deben ser almacenados en una columna de tipo BLOB (Binary Large Object), que puede manejar este tipo de contenido.
+Usos comunes de COMPRESS()
+Optimización de almacenamiento: Se utiliza para comprimir grandes cantidades de texto o datos que ocupan mucho espacio en una base de datos.
+Transmisión de datos: En situaciones donde se necesitan enviar datos por una red o se desea ahorrar ancho de banda, la compresión puede reducir la cantidad de información a transmitir.
+Archivos grandes: Cuando se manejan documentos o archivos de gran tamaño, es útil comprimirlos antes de almacenarlos para ahorrar espacio.*/
+----------------------------------------------------------------
 
 
 
