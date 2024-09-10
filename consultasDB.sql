@@ -44,74 +44,112 @@ INSERT INTO empleados (nombre, apellido, salario, fecha_contratacion, departamen
 # --------- Realice las consultas ------------
 
 # Obtener el salario módulo 100.
+SELECT salario, salario%100 FROM empleados;
 
 # Listar el nombre y  un numero aleatorio para cada empleado
+SELECT nombre, rand() FROM empleados;
+SELECT nombre, floor(1+rand()*20) FROM empleados;
 
 # Redondear el salario a 1 decimal.
+SELECT nombre, salario, ROUND(salario,1) FROM empleados;
+SELECT nombre, salario, FORMAT(salario,1) FROM empleados;
 
 # Truncar el salario a 1 decimal.
+SELECT nombre, salario, TRUNCATE(salario,1) FROM empleados;
 
 # Obtener la longitud del nombre
+SELECT nombre, length(nombre) FROM empleados;
 
 # Concatenar nombre y apellido con un espacio entre ambos.
+SELECT nombre, apellido, CONCAT(nombre,' ',apellido) FROM empleados;
 
 # Insertar una cadena HHHH dentro del nombre.
+SELECT nombre, CONCAT(nombre,'HHHH');
 
 # Encontrar la posición de la letra 'a' en el nombre.
+SELECT nombre, LOCATE('a',nombre) FROM empleados;
 
 # Extraer los primeros 3 caracteres del nombre.
+SELECT nombre, LEFT(nombre,3) FROM empleados;
 
 # Obtener la longitud del email.
+SELECT email, length(email) FROM empleados;
 
 # Localizar la posición de '@' en el email.
+SELECT email, LOCATE('@',email) FROM empleados;
 
 # Convertir el nombre a minúsculas.
+SELECT nombre, LOWER(nombre) FROM empleados;
 
 #  Rellenar el nombre con * a la izquierda hasta 10 caracteres.
+SELECT CONCAT('**********',nombre) FROM empleados; 
+SELECT LPAD(nombre,10,'*') FROM empleados; 
 
 # Eliminar espacios en blanco a la izquierda del nombre.
+SELECT nombre, LTRIM(nombre) FROM empleados; 
 
 # Repetir el nombre 3 veces.
+SELECT nombre, REPEAT(nombre,3) FROM empleados;
 
 # Reemplazar 'a' por 'x' en el nombre.
+SELECT nombre, REPLACE(nombre,'a', 'x') FROM empleados;
 
 # Invertir el nombre.
+SELECT nombre, REVERSE(nombre) FROM empleados;
 
 # Extraer los últimos 2 caracteres del nombre.
+SELECT nombre, RIGHT(nombre,2) FROM empleados;
 
 # Añadir 5 espacios en blanco entre nombre y apellido.
+SELECT nombre, CONCAT(nombre,REPEAT(' ',5),apellido) FROM empleados;
 
 # Añadir 30 días a la fecha de contratación.
+SELECT nombre,fecha_contratacion, ADDDATE(fecha_contratacion, INTERVAL 30 DAY) FROM empleados;
 
 # Calcular la diferencia en días entre la fecha de contratación y la fecha actual.
+SELECT fecha_contratacion, DATEDIFF(fecha_contratacion, CURDATE()) FROM empleados;
 
 # Añadir 1 mes a la fecha de contratación.
+SELECT nombre, fecha_contratacion, ADDDATE(fecha_contratacion, INTERVAL 1 MONTH) FROM empleados;
 
 # Restar 1 semana a la fecha de contratación
+SELECT nombre, fecha_contratacion, DATE_SUB(fecha_contratacion, INTERVAL 1 WEEK) FROM empleados;
 
 # Formatear la fecha de contratación en el formato 'día-mes-año'.
+SELECT nombre, fecha_contratacion, DATE_FORMAT(fecha_contratacion, '%d/%m/%Y') FROM empleados;
 
 # Obtener el nombre del día de la semana de la fecha de contratación.
+SELECT nombre, fecha_contratacion, DAYNAME(fecha_contratacion) FROM empleados;
 
 # Extraer el mes de la fecha de contratación.
+SELECT nombre, fecha_contratacion, MONTH(fecha_contratacion) FROM empleados;
 
 # Obtener el último día del mes de la fecha de contratación.
+SELECT nombre, fecha_contratacion, LAST_DAY(fecha_contratacion) FROM empleados;
 
 # Obtener el nombre del mes de la fecha de contratación.
+SELECT nombre, fecha_contratacion, MONTHNAME(fecha_contratacion) FROM empleados;
 
 # Obtener la fecha y hora actuales.
+SELECT NOW() FROM empleados;
 
 # Calcular la diferencia entre la hora actual y las 02:00:00.
+SELECT TIMEDIFF(CURTIME(), '02:00:00') FROM empleados;
 
 # ¿Cuantos empleados hay?
+SELECT COUNT(nombre) FROM empleados;
 
 # Liste los empleados que se contrataron en el año 2020
+/*SELECT nombre,fecha_contratacion FROM empleados WHERE YEAR = 2020;*/
 
 # ¿Cuál es el email del empleado con ID 2+8/2?
+SELECT id, nombre, email FROM empleados WHERE id = 2+8/2;
 
 # Liste los nombres y apellidos de los empleados ordenados por fecha de contratación de manera descendente
+/*SELECT nombre,apellido,fecha_contratacion FROM empleados WHERE fecha_contratacion DESC ;*/
 
 # ¿Cuáles son los 5 primeros empleados contratados recientemente?
+/*SELECT nombre,apellido,fecha_contratacion FROM empleados WHERE fecha_contratacion ASC ;*/
 
 # Liste empleados cuyo email contenga la palabra 'gmail'
 
@@ -122,8 +160,10 @@ INSERT INTO empleados (nombre, apellido, salario, fecha_contratacion, departamen
 # ¿Liste los empleados cuyo nombre empieza por 'A'?
 
 # ¿Cuál es la longitud promedio de los apellidos de los empleados?
+SELECT apellido, AVG(CHAR_LENGTH(apellido)) FROM empleados;
 
 # ¿Cómo se verían los salarios de los si los invirtiéramos?
+SELECT salario, CAST(REVERSE(CAST(salario AS CHAR)) AS UNSIGNED) FROM empleados;
 
 # ¿Cuántos caracteres tiene el email más largo?
 
